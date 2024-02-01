@@ -1,6 +1,13 @@
 .calculator-chassis {
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-buttons {
+    display: grid;
+    /*grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 25% 25% 25% 25%; */
+    
+    grid-template-columns: repeat(4, 30px);
+    grid-template-rows: repeat(4, auto);
 }
