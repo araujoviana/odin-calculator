@@ -5,10 +5,8 @@ $( ".calculator-chassis" ).draggable();
 
 calculatorDisplay = document.querySelector(".calculator-display");
 
-let userFirstNumber = 0;
-let userOperator = "+";
-let userSecondNumber = 0;
-let insertingSecondNumber = false;
+const numberArray = [];
+const operatorArray = [];
 
 let numberButtons = document.querySelectorAll(".calculator-number");
 numberButtons.forEach(numberButton => {
@@ -22,11 +20,12 @@ operatorButtons.forEach(operatorButton => {
 
     operatorButton.addEventListener('click', () => {
 
-        userOperator = operatorButton.textContent;
-        userFirstNumber = parseInt(calculatorDisplay.textContent);
-        calculatorDisplay.textContent = '';
-        insertingSecondNumber = true;
-
+        if (!(isNaN(parseInt(calculatorDisplay.textContent)))) {
+            operatorArray.push(operatorButton.textContent);  
+            numberArray.push(parseInt(calculatorDisplay.textContent));
+            calculatorDisplay.textContent = '';
+        }
+        
     })
 
 });
@@ -34,13 +33,20 @@ operatorButtons.forEach(operatorButton => {
 let equalButton = document.querySelector(".calculator-equal");
 equalButton.addEventListener('click', () => {
 
-    userSecondNumber = parseInt(calculatorDisplay.textContent);
     calculatorDisplay.textContent = '';
-    calculatorDisplay.textContent = operate(userOperator, userFirstNumber, userSecondNumber);
+    calculatorDisplay.textContent = parseOperations(numberArray, operatorArray);
 
 })
 
-
+// both arguments are arrays
+function parseOperations(numbers, operators) {
+    // returns nothing if the operation is invalid EDGE CASES CHECK LATER
+    // Isolate two number values 
+    // Isolate a single operator
+    // Do a operation with the three
+    // Use the result for the first number values to the next operation if there is one more possible operation
+    // returns the result
+}
 
 
 function operate(operator, firstNumber, secondNumber) {
