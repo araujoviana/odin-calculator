@@ -20,6 +20,7 @@ button:active {
     border: solid;
     border-radius: 5px;
     padding:10px;
+    box-shadow: 5px 5px 15px black;
 }
 
 .calculator-display {
@@ -35,9 +36,18 @@ button:active {
 .calculator-buttons {
     display: grid;    
     grid-template-columns: repeat(5, 30px);
-    
 }
 
+.calculator-operator {
+    background-color: #93265c;
+}
+.calculator-backspace, .calculator-clear {
+    background-color: #5e173b;
+}
+
+.calculator-equal {
+    background-color: #f63b9b;
+}
 .calculator-buttons > button:nth-child(n+17) {
     grid-column-start: span 2;
 }

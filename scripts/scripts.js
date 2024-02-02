@@ -58,12 +58,12 @@ operatorButtons.forEach(operatorButton => {
 
 let dotButton = document.querySelector(".calculator-dot");
 dotButton.addEventListener('click', () => {
-    if (calculatorDisplay.textContent !== '') {
+    if (calculatorDisplay.textContent !== '' && !currentNumber.includes('.')) {
         currentNumber += '.';
+        calculatorDisplay.textContent = currentNumber;
         dotButton.disabled = true;
     }
 });
-
 
 // Doing 3 + 3 + 3.3 then pressing '='  results in 6.003.3 
 
@@ -110,3 +110,65 @@ function calculatorDivide(firstNumber, secondNumber) {
     }
     return firstNumber / secondNumber;
 }
+
+// Keyboard Support
+document.addEventListener('keydown', (keypress) => {
+    switch(keypress.key) {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case '0':
+            currentNumber += keypress.key;
+            calculatorDisplay.textContent = currentNumber;
+            break;
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            if (currentNumber !== '') {
+                if (currentOperator !== null) {
+                    let operationResult = operate(currentOperator, parseFloat(currentResult), parseFloat(currentNumber));
+                    currentResult = typeof operationResult === "number" ? operationResult.toFixed(2) : operationResult;
+                    calculatorDisplay.textContent = currentResult;
+                    currentResult = currentResult.toString(); 
+                } else {
+                    currentResult = parseFloat(currentNumber);
+                }
+                currentOperator = keypress.key;
+                currentNumber = '';
+            }
+            break;
+        case 'Enter': // for the equals key
+            if (currentNumber !== '' && currentOperator !== null) {
+                let operationResult = operate(currentOperator, currentResult, parseFloat(currentNumber));
+                currentResult = typeof operationResult === "number" ? operationResult.toFixed(2) : operationResult;
+                calculatorDisplay.textContent = currentResult;
+                currentOperator = null;
+                currentNumber = '';
+            }
+            break;
+        case 'Backspace': // for the backspace key
+            currentNumber = currentNumber.slice(0, -1);
+            calculatorDisplay.textContent = currentNumber;
+            break;
+        case 'Escape': // for the clear key
+            calculatorDisplay.textContent = '';
+            currentNumber = '';
+            currentOperator = null;
+            break;
+        case '.': // for the dot key
+            if (!currentNumber.includes('.')) {
+                currentNumber += '.';
+                calculatorDisplay.textContent = currentNumber;
+            }
+            break;
+        default:
+            break;
+    }
+});
