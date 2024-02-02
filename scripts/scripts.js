@@ -33,19 +33,32 @@ operatorButtons.forEach(operatorButton => {
 let equalButton = document.querySelector(".calculator-equal");
 equalButton.addEventListener('click', () => {
 
+    if (!(isNaN(parseInt(calculatorDisplay.textContent)))) {
+        numberArray.push(parseInt(calculatorDisplay.textContent));
+    }
     calculatorDisplay.textContent = '';
     calculatorDisplay.textContent = parseOperations(numberArray, operatorArray);
 
 })
 
-// both arguments are arrays
 function parseOperations(numbers, operators) {
     // returns nothing if the operation is invalid EDGE CASES CHECK LATER
-    // Isolate two number values 
-    // Isolate a single operator
-    // Do a operation with the three
-    // Use the result for the first number values to the next operation if there is one more possible operation
-    // returns the result
+    let result = 0;
+    for (let i = 0; i <= numbers.length-1; i++) {
+        let firstNumber = parseInt(numbers[i]);
+        let secondNumber = parseInt(numbers[i+1]);
+        let operator = operators[i];
+
+        if (secondNumber !== undefined && operator !== undefined) {
+            let operationResult = operate(operator, firstNumber, secondNumber);
+            if (typeof operationResult == "number") {
+                result += operationResult;
+            }
+        }
+        
+        console.log(firstNumber + ' ' + secondNumber + ' ' + operator + ' ' + result);
+    }
+    return result;
 }
 
 
