@@ -25,6 +25,5 @@ body {
 }
 
 .calculator-buttons > button:nth-child(n+17) {
-    /* your styles here */
     grid-column-start: span 2;
 }
