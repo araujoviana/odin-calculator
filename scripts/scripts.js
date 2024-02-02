@@ -31,6 +31,7 @@ operatorButtons.forEach(operatorButton => {
                 let operationResult = operate(currentOperator, parseFloat(currentResult), parseFloat(currentNumber));
                 currentResult = typeof operationResult === "number" ? operationResult.toFixed(2) : operationResult;
                 calculatorDisplay.textContent = currentResult;
+                currentResult = currentResult.toString(); 
             } else {
                 dotButton.disabled = false;
                 currentResult = parseFloat(currentNumber);
@@ -41,6 +42,7 @@ operatorButtons.forEach(operatorButton => {
     })
 });
 
+
 let dotButton = document.querySelector(".calculator-dot");
 dotButton.addEventListener('click', () => {
     if (calculatorDisplay.textContent !== '') {
@@ -48,6 +50,8 @@ dotButton.addEventListener('click', () => {
         dotButton.disabled = true;
     }
 });
+
+// Doing 3 + 3 + 3.3 then pressing '='  results in 6.003.3 
 
 let equalButton = document.querySelector(".calculator-equal");
 equalButton.addEventListener('click', () => {
