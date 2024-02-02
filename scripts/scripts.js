@@ -1,3 +1,5 @@
+// Need to deal with results with > 9 digits, for CSS purposes 
+
 // Really wanted to make the calculator draggable
 $( ".calculator-chassis" ).draggable();
 
@@ -25,6 +27,13 @@ clearButton.addEventListener('click', () => {
     currentNumber = '';
     currentOperator = null;
 })
+
+let backspaceButton = document.querySelector(".calculator-backspace");
+backspaceButton.addEventListener('click', () => {
+    currentNumber = currentNumber.slice(0, -1);
+    calculatorDisplay.textContent = currentNumber;
+});
+
 
 let operatorButtons = document.querySelectorAll(".calculator-operator");
 operatorButtons.forEach(operatorButton => {
@@ -54,6 +63,7 @@ dotButton.addEventListener('click', () => {
         dotButton.disabled = true;
     }
 });
+
 
 // Doing 3 + 3 + 3.3 then pressing '='  results in 6.003.3 
 
