@@ -27,11 +27,13 @@ operatorButtons.forEach(operatorButton => {
     operatorButton.addEventListener('click', () => {
         if (currentNumber !== '') {
             if (currentOperator !== null) {
-                let operationResult = operate(currentOperator, currentResult, parseInt(currentNumber));
-                currentResult = typeof operationResult === "number" ? Math.round(operationResult) : operationResult;
+                dotButton.disabled = false;
+                let operationResult = operate(currentOperator, parseFloat(currentResult), parseFloat(currentNumber));
+                currentResult = typeof operationResult === "number" ? operationResult.toFixed(2) : operationResult;
                 calculatorDisplay.textContent = currentResult;
             } else {
-                currentResult = parseInt(currentNumber);
+                dotButton.disabled = false;
+                currentResult = parseFloat(currentNumber);
             }
             currentOperator = operatorButton.textContent;
             currentNumber = '';
@@ -39,11 +41,20 @@ operatorButtons.forEach(operatorButton => {
     })
 });
 
+let dotButton = document.querySelector(".calculator-dot");
+dotButton.addEventListener('click', () => {
+    if (calculatorDisplay.textContent !== '') {
+        currentNumber += '.';
+        dotButton.disabled = true;
+    }
+});
+
 let equalButton = document.querySelector(".calculator-equal");
 equalButton.addEventListener('click', () => {
     if (currentNumber !== '' && currentOperator !== null) {
-        let operationResult = operate(currentOperator, currentResult, parseInt(currentNumber));
-        currentResult = typeof operationResult === "number" ? Math.round(operationResult) : operationResult;
+        dotButton.disabled = false;
+        let operationResult = operate(currentOperator, currentResult, parseFloat(currentNumber));
+        currentResult = typeof operationResult === "number" ? operationResult.toFixed(2) : operationResult;
         calculatorDisplay.textContent = currentResult;
         currentOperator = null;
         currentNumber = '';
