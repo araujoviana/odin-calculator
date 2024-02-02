@@ -10,8 +10,12 @@ let currentOperator = null;
 let numberButtons = document.querySelectorAll(".calculator-number");
 numberButtons.forEach(numberButton => {
     numberButton.addEventListener('click', () => {
-        currentNumber += numberButton.textContent;
-        calculatorDisplay.textContent = currentNumber;
+        // As a noob idk why the length starts at 22 but this works for now
+        if (calculatorDisplay.textContent.length == 22 || calculatorDisplay.textContent.length <= 9 ) {
+            currentNumber += numberButton.textContent;
+            calculatorDisplay.textContent = currentNumber;            
+        }
+
     })
 });
 

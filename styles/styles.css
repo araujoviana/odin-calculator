@@ -2,29 +2,42 @@ body {
     font-size:x-large;
 }
 
+button {
+    font-family: "IBM Plex Sans", sans-serif;
+    background-color: #7f787c;
+    font-weight: bolder;
+}
+
+button:active {
+    background-color: #4c474a;
+}
+
 .calculator-chassis {
+    background-color: #c4bfba;
     display: flex;
     flex-direction: column;
     width: fit-content;
-    
-    border-radius: 10px;
+    border: solid;
+    border-radius: 5px;
+    padding:10px;
 }
 
 .calculator-display {
     font-family: "workbench", sans-serif;
     background-color: #7b9d50;
     padding: 10px;
+    border: solid #8d868d;
+    border-radius: 5px;
     min-height: 24px;
+    margin-bottom: 10px;;
 }
 
 .calculator-buttons {
-    background-color: #c4bfba;
     display: grid;    
     grid-template-columns: repeat(5, 30px);
     
 }
 
 .calculator-buttons > button:nth-child(n+17) {
-    /* your styles here */
     grid-column-start: span 2;
 }
